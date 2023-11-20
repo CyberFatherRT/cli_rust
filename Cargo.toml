@@ -1,0 +1,20 @@
+cargo-features = ["profile-rustflags"]
+[package]
+name = "cli_rust"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "schef"
+path = "./src/main.rs"
+
+[dependencies]
+clap = { version = "4.4.8", features = ["derive", "cargo"] }
+
+[profile.release]
+rustflags = ["-C", "target-cpu=native", "-Z", "threads=8"]
+lto = true
+opt-level = 3
+codegen-units = 1
